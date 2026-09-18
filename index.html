@@ -17,6 +17,7 @@
     --muted: #98a0b5;
     --gold: #e7a93d;
     --blue: #5c7cfa;
+    --green: #13c236;
   }
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
@@ -168,6 +169,15 @@
   }
   .brochure-link:hover{ border-bottom-color: var(--gold); }
 
+  .download-stackfall-link{
+    display:inline-block;
+    color: var(--green);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    font-weight: 500;
+  }
+  .download-stackfall-link:hover{ border-bottom-color: var(--green); }
+
   footer{
     border-top: 1px solid var(--line);
     padding: 32px 0 48px;
@@ -186,6 +196,8 @@
     <ul>
       <li><a href="#about">درباره من</a></li>
       <li><a href="#stackfall">StackFall</a></li>
+      <li><a href="#stackfall-ads">تبلیغات StackFall</a></li>
+      <li><a href="#download-stackfall">دانلود StackFall</a></li>
     </ul>
   </nav>
 
@@ -231,7 +243,10 @@
       است. این پروژه در بخش برنامه‌نویسی و بازی‌سازی جشنواره خوارزمی شرکت کرد و به
       مرحله کشوری راه یافت و مقام اول را کسب کرد.
     </p>
+  </section>
 
+  <section id="stackfall-ads">
+    <h2>تبلیغات StackFall</h2>
     <div class="project-layout">
       <div>
         <p class="media-note">
@@ -243,7 +258,7 @@
       <div>
         <p class="media-note">
           <!-- ویدیوی معرفی بازی را با همین اسم جایگزین کن: assets/media/video/stackfall-demo.mp4 -->
-         ویدیوی معرفی بازی StackFall:
+        ویدیوی معرفی بازی StackFall:
         </p>
         <video controls preload="none">
           <source src="assets/media/video/stackfall-demo.mp4" type="video/mp4">
@@ -252,6 +267,15 @@
         <a class="brochure-link" href="assets/media/brochure/stackfall-brochure.pdf" target="_blank">دانلود بروشور StackFall (PDF)</a>
       </div>
     </div>
+  </section>
+
+  <section id="download-stackfall">
+    <h2>لینک دانلود بازی StackFall</h2>
+    <p>
+      شما می‌توانید با استفاده از این لینک به صورت فایل فشرده بازی را دانلود کنید.
+      <span style="color: red;">هشدار:</span> لطفا فایل را در جایی که هر دو پوشه و فایل کنار هم باشند، استخراج کنید. <br>
+      <a class="download-stackfall-link" href="assets/media/download-stackfall/stackfall-v-exe.zip" target="_blank">دانلود بازی StackFall (zip)</a>
+    </p>
   </section>
 
   <footer>
