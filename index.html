@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مبین رشیدی — برنامه‌نویس و سازنده بازی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #10121a;
+    --surface: #171a26;
+    --surface-2: #1f2333;
+    --line: #2a2f42;
+    --text: #edeef3;
+    --muted: #98a0b5;
+    --gold: #e7a93d;
+    --blue: #5c7cfa;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Vazirmatn", Tahoma, sans-serif;
+    line-height: 1.9;
+  }
+  .wrap{ max-width: 900px; margin: 0 auto; padding: 0 24px; }
+  .prose{ max-width: 62ch; }
+
+  /* ---------- nav ---------- */
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  nav .logo{ font-weight:700; font-size:18px; }
+  nav ul{ display:flex; gap:28px; list-style:none; margin:0; padding:0; }
+  nav a{ color: var(--muted); text-decoration:none; font-size:15px; transition: color .2s; }
+  nav a:hover{ color: var(--text); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding: 72px 0 56px;
+    display:flex; align-items:center; gap:40px;
+    flex-wrap: wrap;
+  }
+  .hero-text{ flex: 1 1 380px; }
+  .hero-text h1{
+    font-size: clamp(34px, 5vw, 52px);
+    font-weight: 900;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+  .hero-text .role{
+    color: var(--muted);
+    font-size: 18px;
+    margin: 0 0 22px;
+    font-weight: 400;
+  }
+  .badge{
+    display:inline-flex; align-items:center; gap:8px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    color: var(--gold);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .badge::before{
+    content:"";
+    width:6px; height:6px; border-radius:50%;
+    background: var(--gold);
+  }
+
+  /* falling blocks decoration */
+  .blocks{
+    flex: 0 0 220px;
+    height: 220px;
+    position: relative;
+  }
+  .blocks span{
+    position:absolute;
+    left: 50%;
+    border-radius: 6px;
+    opacity: 0;
+    animation: drop 0.6s cubic-bezier(.2,.8,.3,1) forwards;
+  }
+  .blocks span:nth-child(1){ width:120px; height:34px; background:var(--gold); top:0px; margin-right:-60px; animation-delay:.1s; }
+  .blocks span:nth-child(2){ width:96px; height:34px; background:var(--blue); top:38px; margin-right:-48px; animation-delay:.35s; }
+  .blocks span:nth-child(3){ width:140px; height:34px; background:var(--surface-2); border:1px solid var(--line); top:76px; margin-right:-70px; animation-delay:.6s; }
+  .blocks span:nth-child(4){ width:80px; height:34px; background:var(--gold); top:114px; margin-right:-40px; animation-delay:.85s; }
+  .blocks span:nth-child(5){ width:130px; height:34px; background:var(--blue); top:152px; margin-right:-65px; animation-delay:1.1s; }
+  @keyframes drop{
+    from{ transform: translate(-50%, -40px); opacity:0; }
+    to{ transform: translate(-50%, 0); opacity:1; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .blocks span{ animation: none; opacity:1; transform: translate(-50%,0); }
+  }
+
+  section{ padding: 48px 0; border-top: 1px solid var(--line); }
+  h2{ font-size: 26px; font-weight: 700; margin: 0 0 18px; }
+  p{ color: var(--muted); margin: 0 0 16px; }
+
+  /* ---------- video block ---------- */
+  video{
+    width: 100%;
+    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    display:block;
+  }
+  .media-note{
+    font-size: 13px;
+    color: #6d7488;
+    margin-top: 10px;
+  }
+
+  /* ---------- about ---------- */
+  .about-grid{
+    display:flex; gap: 48px; flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .about-grid .prose{ flex: 1 1 380px; }
+  blockquote{
+    flex: 1 1 260px;
+    margin: 0;
+    padding: 22px 24px;
+    background: var(--surface);
+    border-right: 3px solid var(--gold);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 16px;
+  }
+  blockquote p{ color: var(--text); margin:0; }
+
+  /* ---------- stackfall project ---------- */
+  .project-poster{
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    display:block;
+    background: var(--surface);
+  }
+  .project-layout{
+    display:grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  @media (max-width: 760px){
+    .project-layout{ grid-template-columns: 1fr; }
+    .hero{ flex-direction: column-reverse; text-align:center; }
+    .blocks{ margin: 0 auto; }
+  }
+  .brochure-link{
+    display:inline-block;
+    margin-top: 64px;
+    margin-right: 96px;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    font-weight: 500;
+  }
+  .brochure-link:hover{ border-bottom-color: var(--gold); }
+
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 32px 0 48px;
+    color: var(--muted);
+    font-size: 14px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  }
+  footer a{ color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <div class="logo">مبین رشیدی</div>
+    <ul>
+      <li><a href="#about">درباره من</a></li>
+      <li><a href="#stackfall">StackFall</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" style="border-top:none;">
+    <div class="hero-text">
+      <span class="badge">کسب عنوان پدیده جشنواره نوجوان خوارزمی</span>
+      <h1>مبین رشیدی</h1>
+      <p class="role">برنامه‌نویس و سازنده بازی — سنندج، کردستان</p>
+      <p>سازنده بازی StackFall؛ پروژه‌ای که از دبیرستان امام محمد غزالی تا مرحله کشوری جشنواره خوارزمی پیش رفت.</p>
+    </div>
+    <div class="blocks">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>درباره من</h2>
+    <div class="about-grid">
+      <div class="prose">
+        <p>
+          من مبین رشیدی هستم، دانش‌آموز دبیرستان نمونه دولتی امام محمد غزالی در سنندج.
+          علاقه‌ام به برنامه‌نویسی و ساخت بازی از جایی شروع شد که دسترسی به اینترنت
+          به‌خاطر شرایط جنگ محدود به شبکه‌ی ملی بود.
+          در همان دوران با طرح ملی ایران دیجیتال آشنا شدم و پس از اتمام دوره با ساخت بازی های رایانه ای آشنا شدم.
+        </p>
+        <p>
+          حاصل این مسیر، بازی <strong>StackFall</strong> بود؛ یک بازی سه‌بعدی چیدن بلوک با
+          تایمینگ که با پایتون و موتور Ursina ساختم و برای بخش برنامه‌نویسی / بازی‌سازی
+          جشنواره نوجوان خوارزمی آماده کردم.
+        </p>
+      </div>
+      <blockquote>
+        <p>راز موفقیتم این بود که در سخت‌ترین شرایط دسترسی به اینترنت، به‌جای متوقف شدن، از همان امکانات محدود برای یادگیری استفاده کردم.</p>
+      </blockquote>
+    </div>
+  </section>
+
+  <section id="stackfall">
+    <h2>StackFall</h2>
+    <p>
+      StackFall یک بازی سه‌بعدی چیدن بلوک با تایمینگ است که با پایتون و موتور Ursina
+      ساخته شده و شامل اقتصاد سکه، فروشگاه رنگ، ۱۰ مرحله، و ذخیره پیشرفت برای هر بازیکن
+      است. این پروژه در بخش برنامه‌نویسی و بازی‌سازی جشنواره خوارزمی شرکت کرد و به
+      مرحله کشوری راه یافت و مقام اول را کسب کرد.
+    </p>
+
+    <div class="project-layout">
+      <div>
+        <p class="media-note">
+          <!-- تصویر پوستر بازی را با همین اسم جایگزین کن: assets/media/poster/stackfall-poster.jpg -->
+          پوستر معرفی بازی StackFall:
+        </p>
+        <img class="project-poster" src="assets/media/poster/stackfall-poster.png" alt="پوستر بازی StackFall">
+      </div>
+      <div>
+        <p class="media-note">
+          <!-- ویدیوی معرفی بازی را با همین اسم جایگزین کن: assets/media/video/stackfall-demo.mp4 -->
+         ویدیوی معرفی بازی StackFall:
+        </p>
+        <video controls preload="none">
+          <source src="assets/media/video/stackfall-demo.mp4" type="video/mp4">
+          مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+        </video>
+        <a class="brochure-link" href="assets/media/brochure/stackfall-brochure.pdf" target="_blank">دانلود بروشور StackFall (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© مبین رشیدی</span>
+    <span><a href="https://github.com/mrmobin-dev" title="github link">github.com/mrmobin-dev</a></span>
+  </footer>
+</div>
+
+</body>
+</html>
